@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Text Analyzer - 多角的文章分析AI (2026 Ver.)</title>
+    <title>Deep Text Analyzer - 多角的文章分析AI (2026 Pro)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
         </div>
     </header>
 
-    <!-- はじめに / ガイドセクション -->
+    <!-- ガイドセクション -->
     <section class="max-w-5xl mx-auto px-4 mt-8">
         <div class="bg-white rounded-xl shadow-sm border border-blue-200 overflow-hidden">
             <div class="bg-blue-50 px-6 py-4 border-b border-blue-100 flex items-center gap-2">
@@ -48,32 +48,24 @@
             </div>
             <div class="p-6 text-sm text-gray-600 space-y-4 leading-relaxed">
                 <p>
-                    Deep Text Analyzerは、単なる要約ツールではありません。
-                    <strong>論理学、認知科学、歴史学、科学的検証</strong>など、多様なアカデミックな視点を「レンズ」として適用し、
-                    文章の裏にある意図、構造、バイアスを多角的に分析します。
+                    Deep Text Analyzerは、<strong>論理学、認知科学、歴史学、科学的検証</strong>など、多様なアカデミックな視点を「レンズ」として適用し、文章の深層分析を行います。
+                    <br>
+                    <span class="text-blue-600 font-bold">NEW:</span> 図表やグラフの画像も同時にアップロードすることで、データと本文の整合性も分析可能になりました。
                 </p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 pt-4 border-t border-gray-100">
                     <div>
-                        <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">🔑 APIキーが必要な理由と安全性</h3>
+                        <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">🔑 APIキーと安全性</h3>
                         <ul class="list-disc list-inside space-y-1 ml-1 text-gray-600">
-                            <li>本ツールはGoogleの高性能AI <strong>Gemini</strong> を使用して分析を行います。</li>
-                            <li>利用にはGoogleアカウントに紐付いたAPIキー（無料枠あり）が必要です。</li>
-                            <li class="bg-green-50 text-green-800 p-2 rounded mt-2 border border-green-100">
-                                <strong>🔒 安心設計：</strong><br>
-                                入力されたAPIキーは、あなたのブラウザ内でのみ使用され、Googleのサーバーと直接通信します。<br>
-                                <strong>当サイトの運営者や外部サーバーにキーが送信・保存されることは一切ありません。</strong>
-                            </li>
+                            <li>GoogleのAI <strong>Gemini</strong> を使用します。</li>
+                            <li>APIキーはブラウザ内でのみ使用され、外部サーバーには送信されません。</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">📂 出力機能について</h3>
+                        <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">📂 出力機能</h3>
                         <ul class="list-disc list-inside space-y-1 ml-1 text-gray-600">
-                            <li>生成された分析レポートは、用途に合わせて以下の3形式でダウンロード可能です。</li>
-                            <li class="pl-4 mt-1">📄 <strong>Text (.txt):</strong> シンプルなメモ用</li>
-                            <li class="pl-4">📝 <strong>Markdown (.md):</strong> Notion, Obsidian, GitHub等用</li>
-                            <li class="pl-4">🌐 <strong>HTML (.html):</strong> ブラウザでそのまま閲覧・共有用</li>
-                            <li class="mt-2 text-xs text-gray-400">※ダウンロード後も画面上のレポートはリセットされません。</li>
+                            <li>Text, Markdown, HTML形式でダウンロード可能。</li>
+                            <li>画像を含めた分析結果もレポートに出力されます。</li>
                         </ul>
                     </div>
                 </div>
@@ -84,7 +76,7 @@
     <!-- メインコンテンツ -->
     <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <!-- 左カラム：設定と入力 -->
+        <!-- 左カラム：設定 -->
         <div class="md:col-span-1 space-y-6">
             
             <!-- APIキー設定 -->
@@ -92,9 +84,8 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Gemini API Key</label>
                 <input type="password" id="apiKey" placeholder="AIzaSy..." class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
                 <p class="text-xs text-gray-500 mt-2">
-                    ※Gemini 1.5以前のキーは使用できません。<br>
                     <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-blue-600 hover:underline flex items-center gap-1">
-                        Google AI Studioで最新キーを取得 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        Google AI Studioでキーを取得 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </a>
                 </p>
             </div>
@@ -121,10 +112,10 @@
             </button>
         </div>
 
-        <!-- 右カラム：入力テキストと結果 -->
+        <!-- 右カラム：入力と結果 -->
         <div class="md:col-span-2 space-y-6">
             
-            <!-- 注意書き (新規追加) -->
+            <!-- 注意書き -->
             <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r shadow-sm">
                 <div class="flex">
                     <div class="flex-shrink-0">
@@ -135,7 +126,7 @@
                     <div class="ml-3">
                         <p class="text-sm text-yellow-700">
                             <strong>⚠️ 最新情報に関する注意:</strong><br>
-                            AIの知識は学習データに基づいています。直近のニュースや出来事については、正確な情報を持っていないか、事実と異なる回答をする可能性があります。
+                            AIの知識は学習データに基づいています。直近のニュース等については正確な情報を持っていない可能性があります。
                         </p>
                     </div>
                 </div>
@@ -143,31 +134,35 @@
 
             <!-- テキスト入力エリア -->
             <div class="bg-white p-1 rounded-xl shadow-sm border border-gray-100">
-                <textarea id="inputText" rows="6" class="w-full p-4 rounded-lg focus:outline-none resize-y text-gray-700" placeholder="ここに分析したい文章を入力してください...&#10;(例: ニュース記事、広告文、謝罪文、SNSの投稿、小説など)"></textarea>
+                <textarea id="inputText" rows="6" class="w-full p-4 rounded-lg focus:outline-none resize-y text-gray-700" placeholder="ここに分析したい文章を入力してください...&#10;(例: ニュース記事、広告文、謝罪文、SNSの投稿など)"></textarea>
+                
+                <!-- 画像アップロードエリア (新規追加) -->
+                <div class="border-t border-gray-100 p-3 bg-gray-50 rounded-b-lg flex items-center gap-4">
+                    <label class="cursor-pointer flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span class="font-semibold">図表・画像を追加 (任意)</span>
+                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    </label>
+                    <div id="imagePreviewName" class="text-xs text-gray-500 truncate max-w-[200px]"></div>
+                    <button id="clearImageBtn" class="hidden text-xs text-red-500 hover:underline">削除</button>
+                </div>
+                <!-- 画像プレビュー表示 -->
+                <div id="imagePreviewContainer" class="hidden p-4 bg-gray-50 border-t border-gray-200">
+                    <img id="imagePreview" src="" alt="Preview" class="max-h-48 rounded shadow-sm border border-gray-300">
+                </div>
             </div>
 
             <!-- 結果表示エリア -->
             <div id="resultContainer" class="hidden">
                 <div class="flex justify-between items-center mb-2">
                     <h2 class="text-lg font-bold text-gray-800">📊 分析レポート</h2>
-                    
-                    <!-- エクスポートボタン群 -->
                     <div class="flex gap-2">
-                        <button onclick="exportReport('txt')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">
-                            📄 TXT
-                        </button>
-                        <button onclick="exportReport('md')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">
-                            📝 MD
-                        </button>
-                        <button onclick="exportReport('html')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">
-                            🌐 HTML
-                        </button>
+                        <button onclick="exportReport('txt')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">📄 TXT</button>
+                        <button onclick="exportReport('md')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">📝 MD</button>
+                        <button onclick="exportReport('html')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">🌐 HTML</button>
                     </div>
                 </div>
-
-                <div id="outputContent" class="bg-white p-6 rounded-xl shadow-md border border-gray-200 prose max-w-none text-sm leading-relaxed">
-                    <!-- 結果表示 -->
-                </div>
+                <div id="outputContent" class="bg-white p-6 rounded-xl shadow-md border border-gray-200 prose max-w-none text-sm leading-relaxed"></div>
             </div>
 
         </div>
@@ -181,10 +176,10 @@
     </footer>
 
     <script>
-        // --- 強化されたシステムプロンプト (歴史・科学視点を追加) ---
+        // --- システムプロンプト (画像分析対応版) ---
         const SYSTEM_PROMPT = `
 あなたは、認知科学、哲学、論理学、社会学、歴史学、科学哲学に精通した最高レベルのテキスト分析官です。
-ユーザーから入力された文章に対し、以下の「3段階のマッピングプロセス」を経て、最も適切な分析を行ってください。
+ユーザーから入力された文章（および添付された図表）に対し、以下のプロセスを経て深層分析を行ってください。
 
 # 分析プロセス
 
@@ -193,28 +188,29 @@
 [ A. 説得・オピニオン / B. ビジネス・広報 / C. 情報・知識 / D. 物語・個人 ]
 
 ## Step 2: 詳細ジャンル（サブカテゴリ）の特定
-大カテゴリの中で、さらに具体的な性質（トーンや目的）を特定してください。
-*   **A系:** [A-1. 扇動・極論(ヘイト/攻撃)], [A-2. 建設的議論(提言)], [A-3. 皮肉・風刺]
+*   **A系:** [A-1. 扇動・極論], [A-2. 建設的議論], [A-3. 皮肉・風刺]
 *   **B系:** [B-1. セールス・広告], [B-2. 謝罪・危機管理], [B-3. ビジョン・方針]
 *   **C系:** [C-1. ニュース・報道], [C-2. 解説・教育], [C-3. 陰謀論・都市伝説]
 *   **D系:** [D-1. エッセイ・体験談], [D-2. 創作・フィクション]
 
 ## Step 3: 最適な分析レンズの装着
-特定したサブカテゴリに基づき、以下の【レンズリスト】から**最も鋭い洞察を与える3〜4つの視点**を選定し、分析を実行してください。
+以下の【レンズリスト】から**最も鋭い洞察を与える3〜4つの視点**を選定してください。
+**※重要: 画像（図表・グラフ）が添付されている場合は、必ず「13. 図表・データ整合性」を優先的に適用してください。**
 
 **【レンズリスト】**
-1.  **認知モード (System 1 & 2):** 直感(Sys1)をハックしているか、熟慮(Sys2)を促しているか。
-2.  **環世界 (Umwelt):** 筆者の主観的な世界（バブル）に閉じこもっていないか。他者への想像力。
-3.  **普遍的理性 (Universal Reason):** 立場を超えて通用する理屈か。エゴイズムの有無。
-4.  **権力と構造 (Power & Structure):** 誰が語り、誰が排除されているか。ポジショントーク。
-5.  **ナラティブと元型:** どのような物語（ヒーロー/ヴィラン）を描いているか。
-6.  **フレーミング:** 情報をどう切り取り、印象操作しているか。
-7.  **ミーム・感染力:** なぜ拡散しやすいのか（単純化、感情煽動）。
-8.  **論理的整合性:** 矛盾、誤謬、飛躍。
-9.  **科学的信憑性 (Scientific Credibility):** 科学的コンセンサスとの一致、疑似科学の判別、エビデンスの質。
-10. **歴史的信憑性 (Historical Credibility):** 史実との整合性、歴史修正主義、時代錯誤（アナクロニズム）の有無。
-11. **倫理・公平性:** 差別、偏見、多様性。
-12. **実用性・実行可能性:** 具体的なアクションプラン。
+1.  **認知モード (System 1 & 2):** 直感(Sys1)ハックか、熟慮(Sys2)か。
+2.  **環世界 (Umwelt):** 認識のバブル、他者への想像力。
+3.  **普遍的理性 (Universal Reason):** 普遍性、脱エゴイズム。
+4.  **権力と構造 (Power & Structure):** 支配構造、ポジショントーク。
+5.  **ナラティブと元型:** 物語構造（ヒーロー/ヴィラン）。
+6.  **フレーミング:** 印象操作、切り取り。
+7.  **ミーム・感染力:** 拡散性、単純化。
+8.  **論理的整合性:** 矛盾、誤謬。
+9.  **科学的信憑性:** 科学的コンセンサス、エビデンスの質。
+10. **歴史的信憑性:** 史実との整合性、時代錯誤。
+11. **倫理・公平性:** 差別、偏見。
+12. **実用性・実行可能性:** アクションプラン。
+13. **図表・データ整合性 (Visual Data Consistency):** 本文の主張と、添付された図表・グラフのデータが一致しているか。グラフの軸操作や視覚的トリック（チェリーピッキング）がないか。
 
 ---
 
@@ -225,15 +221,15 @@
 *   **詳細ジャンル:** [Step2の結果]
 
 ## 🧠 適用した分析レンズ
-1. **[視点名]**: [なぜこのジャンルにこの視点を選んだか]
+1. **[視点名]**: [選定理由]
 2. **[視点名]**: [選定理由]
 3. **[視点名]**: [選定理由]
 
 ## 📝 深層分析レポート
 
 ### 1. [視点名] による分析
-*   **洞察:** [分析内容。抽象論ではなく、文章の意図や構造に深く切り込む]
-*   **引用:** "[該当箇所]"
+*   **洞察:** [分析内容]
+*   **引用:** "[該当箇所]" (画像の場合は「添付図表」と記述)
 
 （以下、選定した視点分繰り返す）
 
@@ -245,11 +241,18 @@
 
         // --- 変数 ---
         let rawMarkdown = "";
+        let selectedImageBase64 = null;
+        let selectedImageMimeType = null;
 
         // --- DOM要素 ---
         const apiKeyInput = document.getElementById('apiKey');
         const modelSelect = document.getElementById('modelSelect');
         const inputText = document.getElementById('inputText');
+        const imageInput = document.getElementById('imageInput');
+        const imagePreviewName = document.getElementById('imagePreviewName');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const clearImageBtn = document.getElementById('clearImageBtn');
         const analyzeBtn = document.getElementById('analyzeBtn');
         const resetBtn = document.getElementById('resetBtn');
         const resultContainer = document.getElementById('resultContainer');
@@ -257,19 +260,51 @@
         const loadingSpinner = document.getElementById('loadingSpinner');
 
         // --- イベントリスナー ---
+        
+        // 画像選択時
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                // プレビュー表示
+                imagePreview.src = event.target.result;
+                imagePreviewContainer.classList.remove('hidden');
+                imagePreviewName.textContent = file.name;
+                clearImageBtn.classList.remove('hidden');
+
+                // API送信用データ準備 (Base64のヘッダー除去)
+                selectedImageBase64 = event.target.result.split(',')[1];
+                selectedImageMimeType = file.type;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // 画像削除ボタン
+        clearImageBtn.addEventListener('click', () => {
+            imageInput.value = '';
+            selectedImageBase64 = null;
+            selectedImageMimeType = null;
+            imagePreviewContainer.classList.add('hidden');
+            imagePreviewName.textContent = '';
+            clearImageBtn.classList.add('hidden');
+        });
+
+        // 分析ボタン
         analyzeBtn.addEventListener('click', async () => {
             const apiKey = apiKeyInput.value.trim();
             const text = inputText.value.trim();
             const model = modelSelect.value;
 
             if (!apiKey) { alert('APIキーを入力してください。'); return; }
-            if (!text) { alert('分析する文章を入力してください。'); return; }
+            if (!text && !selectedImageBase64) { alert('分析する文章または画像を入力してください。'); return; }
 
             setLoading(true);
             resultContainer.classList.add('hidden');
 
             try {
-                const result = await callGeminiAPI(apiKey, model, text);
+                const result = await callGeminiAPI(apiKey, model, text, selectedImageBase64, selectedImageMimeType);
                 rawMarkdown = result;
                 outputContent.innerHTML = marked.parse(result);
                 resultContainer.classList.remove('hidden');
@@ -282,9 +317,11 @@
             }
         });
 
+        // リセットボタン
         resetBtn.addEventListener('click', () => {
             if(confirm('入力内容と分析結果をクリアしますか？')) {
                 inputText.value = '';
+                clearImageBtn.click(); // 画像もクリア
                 outputContent.innerHTML = '';
                 resultContainer.classList.add('hidden');
                 rawMarkdown = "";
@@ -304,10 +341,28 @@
             }
         }
 
-        async function callGeminiAPI(key, model, userText) {
+        async function callGeminiAPI(key, model, userText, imageBase64, mimeType) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+            
+            // コンテンツパーツの構築
+            const parts = [];
+            parts.push({ text: SYSTEM_PROMPT });
+            
+            // 画像がある場合
+            if (imageBase64) {
+                parts.push({
+                    inline_data: {
+                        mime_type: mimeType,
+                        data: imageBase64
+                    }
+                });
+                parts.push({ text: "\n\n(※ユーザーが画像を添付しました。図表やグラフが含まれている場合は、そのデータと本文の整合性も分析してください)" });
+            }
+
+            parts.push({ text: `\n\n# 入力文章\n${userText}` });
+
             const payload = {
-                contents: [{ role: "user", parts: [{ text: SYSTEM_PROMPT }, { text: `\n\n# 入力文章\n${userText}` }] }],
+                contents: [{ role: "user", parts: parts }],
                 generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 8192 }
             };
 
