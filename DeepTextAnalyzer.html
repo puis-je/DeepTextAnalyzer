@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Text Analyzer - 多角的文章分析AI (2026 Ver.)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .prose h3 { margin-top: 1.5em; margin-bottom: 0.5em; font-weight: 700; color: #1f2937; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.2em; }
+        .prose h4 { margin-top: 1.2em; margin-bottom: 0.5em; font-weight: 600; color: #374151; }
+        .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; }
+        .prose li { margin-bottom: 0.5em; }
+        .prose strong { color: #2563eb; }
+        .prose blockquote { border-left: 4px solid #3b82f6; background-color: #eff6ff; padding: 0.5em 1em; color: #1e40af; font-style: italic; margin: 1em 0; border-radius: 0 4px 4px 0; }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🧠</span>
+                <h1 class="text-xl font-bold text-gray-900">Deep Text Analyzer <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full ml-2">2026 Pro</span></h1>
+            </div>
+            <a href="https://github.com/" target="_blank" class="text-sm text-gray-500 hover:text-gray-900">GitHubで公開中</a>
+        </div>
+    </header>
+
+    <!-- はじめに / ガイドセクション -->
+    <section class="max-w-5xl mx-auto px-4 mt-8">
+        <div class="bg-white rounded-xl shadow-sm border border-blue-200 overflow-hidden">
+            <div class="bg-blue-50 px-6 py-4 border-b border-blue-100 flex items-center gap-2">
+                <span class="text-xl">ℹ️</span>
+                <h2 class="font-bold text-gray-800">はじめに：このツールについて</h2>
+            </div>
+            <div class="p-6 text-sm text-gray-600 space-y-4 leading-relaxed">
+                <p>
+                    Deep Text Analyzerは、単なる要約ツールではありません。
+                    <strong>論理学、認知科学、歴史学、科学的検証</strong>など、多様なアカデミックな視点を「レンズ」として適用し、
+                    文章の裏にある意図、構造、バイアスを多角的に分析します。
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 pt-4 border-t border-gray-100">
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">🔑 APIキーが必要な理由と安全性</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-1 text-gray-600">
+                            <li>本ツールはGoogleの高性能AI <strong>Gemini</strong> を使用して分析を行います。</li>
+                            <li>利用にはGoogleアカウントに紐付いたAPIキー（無料枠あり）が必要です。</li>
+                            <li class="bg-green-50 text-green-800 p-2 rounded mt-2 border border-green-100">
+                                <strong>🔒 安心設計：</strong><br>
+                                入力されたAPIキーは、あなたのブラウザ内でのみ使用され、Googleのサーバーと直接通信します。<br>
+                                <strong>当サイトの運営者や外部サーバーにキーが送信・保存されることは一切ありません。</strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">📂 出力機能について</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-1 text-gray-600">
+                            <li>生成された分析レポートは、用途に合わせて以下の3形式でダウンロード可能です。</li>
+                            <li class="pl-4 mt-1">📄 <strong>Text (.txt):</strong> シンプルなメモ用</li>
+                            <li class="pl-4">📝 <strong>Markdown (.md):</strong> Notion, Obsidian, GitHub等用</li>
+                            <li class="pl-4">🌐 <strong>HTML (.html):</strong> ブラウザでそのまま閲覧・共有用</li>
+                            <li class="mt-2 text-xs text-gray-400">※ダウンロード後も画面上のレポートはリセットされません。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- メインコンテンツ -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- 左カラム：設定と入力 -->
+        <div class="md:col-span-1 space-y-6">
+            
+            <!-- APIキー設定 -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Gemini API Key</label>
+                <input type="password" id="apiKey" placeholder="AIzaSy..." class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                <p class="text-xs text-gray-500 mt-2">
+                    ※Gemini 1.5以前のキーは使用できません。<br>
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-blue-600 hover:underline flex items-center gap-1">
+                        Google AI Studioで最新キーを取得 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a>
+                </p>
+            </div>
+
+            <!-- モデル選択 -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">使用モデル (Gemini)</label>
+                <select id="modelSelect" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm bg-white">
+                    <option value="gemini-2.5-flash" selected>Gemini 2.5 Flash (標準・推奨)</option>
+                    <option value="gemini-3.0-flash-preview">Gemini 3.0 Flash Preview (高速・最新)</option>
+                    <option value="gemini-3.0-pro-preview">Gemini 3.0 Pro Preview (最高精度)</option>
+                </select>
+            </div>
+
+            <!-- 分析ボタン -->
+            <button id="analyzeBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition duration-200 flex justify-center items-center gap-2">
+                <span>分析を実行する</span>
+                <div id="loadingSpinner" class="loader hidden"></div>
+            </button>
+
+            <!-- リセットボタン -->
+            <button id="resetBtn" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-200 text-sm">
+                結果をリセット
+            </button>
+        </div>
+
+        <!-- 右カラム：入力テキストと結果 -->
+        <div class="md:col-span-2 space-y-6">
+            
+            <!-- 注意書き (新規追加) -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r shadow-sm">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            <strong>⚠️ 最新情報に関する注意:</strong><br>
+                            AIの知識は学習データに基づいています。直近のニュースや出来事については、正確な情報を持っていないか、事実と異なる回答をする可能性があります。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- テキスト入力エリア -->
+            <div class="bg-white p-1 rounded-xl shadow-sm border border-gray-100">
+                <textarea id="inputText" rows="6" class="w-full p-4 rounded-lg focus:outline-none resize-y text-gray-700" placeholder="ここに分析したい文章を入力してください...&#10;(例: ニュース記事、広告文、謝罪文、SNSの投稿、小説など)"></textarea>
+            </div>
+
+            <!-- 結果表示エリア -->
+            <div id="resultContainer" class="hidden">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-bold text-gray-800">📊 分析レポート</h2>
+                    
+                    <!-- エクスポートボタン群 -->
+                    <div class="flex gap-2">
+                        <button onclick="exportReport('txt')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">
+                            📄 TXT
+                        </button>
+                        <button onclick="exportReport('md')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">
+                            📝 MD
+                        </button>
+                        <button onclick="exportReport('html')" class="text-xs bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1 rounded shadow-sm flex items-center gap-1">
+                            🌐 HTML
+                        </button>
+                    </div>
+                </div>
+
+                <div id="outputContent" class="bg-white p-6 rounded-xl shadow-md border border-gray-200 prose max-w-none text-sm leading-relaxed">
+                    <!-- 結果表示 -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-100 py-6 mt-auto">
+        <div class="max-w-5xl mx-auto px-4 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Deep Text Analyzer. Powered by Google Gemini API (v2.5/v3.0).</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 強化されたシステムプロンプト (歴史・科学視点を追加) ---
+        const SYSTEM_PROMPT = `
+あなたは、認知科学、哲学、論理学、社会学、歴史学、科学哲学に精通した最高レベルのテキスト分析官です。
+ユーザーから入力された文章に対し、以下の「3段階のマッピングプロセス」を経て、最も適切な分析を行ってください。
+
+# 分析プロセス
+
+## Step 1: 大カテゴリの判定
+文章を以下の4つから分類してください。
+[ A. 説得・オピニオン / B. ビジネス・広報 / C. 情報・知識 / D. 物語・個人 ]
+
+## Step 2: 詳細ジャンル（サブカテゴリ）の特定
+大カテゴリの中で、さらに具体的な性質（トーンや目的）を特定してください。
+*   **A系:** [A-1. 扇動・極論(ヘイト/攻撃)], [A-2. 建設的議論(提言)], [A-3. 皮肉・風刺]
+*   **B系:** [B-1. セールス・広告], [B-2. 謝罪・危機管理], [B-3. ビジョン・方針]
+*   **C系:** [C-1. ニュース・報道], [C-2. 解説・教育], [C-3. 陰謀論・都市伝説]
+*   **D系:** [D-1. エッセイ・体験談], [D-2. 創作・フィクション]
+
+## Step 3: 最適な分析レンズの装着
+特定したサブカテゴリに基づき、以下の【レンズリスト】から**最も鋭い洞察を与える3〜4つの視点**を選定し、分析を実行してください。
+
+**【レンズリスト】**
+1.  **認知モード (System 1 & 2):** 直感(Sys1)をハックしているか、熟慮(Sys2)を促しているか。
+2.  **環世界 (Umwelt):** 筆者の主観的な世界（バブル）に閉じこもっていないか。他者への想像力。
+3.  **普遍的理性 (Universal Reason):** 立場を超えて通用する理屈か。エゴイズムの有無。
+4.  **権力と構造 (Power & Structure):** 誰が語り、誰が排除されているか。ポジショントーク。
+5.  **ナラティブと元型:** どのような物語（ヒーロー/ヴィラン）を描いているか。
+6.  **フレーミング:** 情報をどう切り取り、印象操作しているか。
+7.  **ミーム・感染力:** なぜ拡散しやすいのか（単純化、感情煽動）。
+8.  **論理的整合性:** 矛盾、誤謬、飛躍。
+9.  **科学的信憑性 (Scientific Credibility):** 科学的コンセンサスとの一致、疑似科学の判別、エビデンスの質。
+10. **歴史的信憑性 (Historical Credibility):** 史実との整合性、歴史修正主義、時代錯誤（アナクロニズム）の有無。
+11. **倫理・公平性:** 差別、偏見、多様性。
+12. **実用性・実行可能性:** 具体的なアクションプラン。
+
+---
+
+# 出力フォーマット（Markdown形式）
+
+## 📊 文章タイプ判定
+*   **大カテゴリ:** [Step1の結果]
+*   **詳細ジャンル:** [Step2の結果]
+
+## 🧠 適用した分析レンズ
+1. **[視点名]**: [なぜこのジャンルにこの視点を選んだか]
+2. **[視点名]**: [選定理由]
+3. **[視点名]**: [選定理由]
+
+## 📝 深層分析レポート
+
+### 1. [視点名] による分析
+*   **洞察:** [分析内容。抽象論ではなく、文章の意図や構造に深く切り込む]
+*   **引用:** "[該当箇所]"
+
+（以下、選定した視点分繰り返す）
+
+---
+## 💡 総合考察
+（文章の信頼性、知性、危険性などを総合的に評価し、S〜Dランクで判定）
+※注意: 最新のニュース等に関しては、学習データのタイムラグにより正確な判定ができない可能性があります。
+`;
+
+        // --- 変数 ---
+        let rawMarkdown = "";
+
+        // --- DOM要素 ---
+        const apiKeyInput = document.getElementById('apiKey');
+        const modelSelect = document.getElementById('modelSelect');
+        const inputText = document.getElementById('inputText');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const resultContainer = document.getElementById('resultContainer');
+        const outputContent = document.getElementById('outputContent');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // --- イベントリスナー ---
+        analyzeBtn.addEventListener('click', async () => {
+            const apiKey = apiKeyInput.value.trim();
+            const text = inputText.value.trim();
+            const model = modelSelect.value;
+
+            if (!apiKey) { alert('APIキーを入力してください。'); return; }
+            if (!text) { alert('分析する文章を入力してください。'); return; }
+
+            setLoading(true);
+            resultContainer.classList.add('hidden');
+
+            try {
+                const result = await callGeminiAPI(apiKey, model, text);
+                rawMarkdown = result;
+                outputContent.innerHTML = marked.parse(result);
+                resultContainer.classList.remove('hidden');
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error(error);
+                alert('エラーが発生しました: ' + error.message);
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if(confirm('入力内容と分析結果をクリアしますか？')) {
+                inputText.value = '';
+                outputContent.innerHTML = '';
+                resultContainer.classList.add('hidden');
+                rawMarkdown = "";
+            }
+        });
+
+        // --- 関数 ---
+        function setLoading(isLoading) {
+            if (isLoading) {
+                analyzeBtn.disabled = true;
+                analyzeBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                loadingSpinner.classList.remove('hidden');
+            } else {
+                analyzeBtn.disabled = false;
+                analyzeBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+        async function callGeminiAPI(key, model, userText) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: SYSTEM_PROMPT }, { text: `\n\n# 入力文章\n${userText}` }] }],
+                generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 8192 }
+            };
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                let errorMessage = errorData.error?.message || 'API request failed';
+                if (errorMessage.includes('404')) errorMessage += `\n(モデル ${model} が見つかりません)`;
+                throw new Error(errorMessage);
+            }
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+        }
+
+        function exportReport(type) {
+            if (!rawMarkdown) return;
+            let content = "", mimeType = "", extension = "";
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+            const filename = `analysis_report_${timestamp}`;
+
+            if (type === 'txt') {
+                content = document.getElementById('outputContent').innerText;
+                mimeType = 'text/plain'; extension = 'txt';
+            } else if (type === 'md') {
+                content = rawMarkdown;
+                mimeType = 'text/markdown'; extension = 'md';
+            } else if (type === 'html') {
+                content = `<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title>分析レポート</title><style>body{font-family:sans-serif;max-width:800px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#333;}blockquote{border-left:4px solid #ccc;padding-left:1em;color:#666;}</style></head><body>${marked.parse(rawMarkdown)}</body></html>`;
+                mimeType = 'text/html'; extension = 'html';
+            }
+
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = `${filename}.${extension}`;
+            document.body.appendChild(a); a.click();
+            document.body.removeChild(a); URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
